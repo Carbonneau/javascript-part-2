@@ -11,15 +11,98 @@ and its constructor will generate width * height `Tile` objects.
 
 To do this exercise, let's follow these steps:
 
-  * Create a constructor function called `Tile` that can create new tiles for our map. This function will take parameter `type` and create an object that has these properties:
-    * `type`: whatever was passed to the `Tile` constructor function
-  * The `Tile` objects should also have a method called `isWalkable`. This method should, using `this.type`, return `true` or `false` depending on whether the tile can be walked on. The function should return `true` if the type is "grass" or "sand". The function should return `false` if the type is anything else.
-  * Create a constructor function called `Map` that will generate a map. This function will take parameters `width` and `height` and create a map object with these properties:
-    * `width`: whatever was passed to the `Map` constructor function (should be an integer value)
-    * `height`: whatever was passed to the `Map` constructor function (should be an integer value)
-    * `tiles`: this property should be created as a 2D array of `Tile` objects *inside the constructor*. Using two nested `for` loops bound by `width` and `height` respectively, create `new Tile` objects and give them a **random** value for the `type`, between "grass", "sand" and "water".
+  * Create a constructor function called `Tile` 
+    that can create new tiles for our map. 
+    This function will take parameter `type` and 
+    create an object that has these properties:
+    
+  * `type`: whatever was passed to the `Tile` constructor function
+  
+  * The `Tile` objects should also have a method called `isWalkable`. 
+    This method should, using `this.type`, return `true` or `false` 
+    depending on whether the tile can be walked on. 
+    The function should return `true` if the type is "grass" or "sand". 
+    The function should return `false` if the type is anything else.
+*/    
+function Tile(type) {
+    this.type = type;
+    this.isWalkable = function() {
+        if (this.type === "grass" || "sand") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+}
+
+
+var tileTypes = ["grass", "sand", "water"];
+
+function Map(width,height) {
+  
+    this.width = width;
+    this.height = height;
+    this.tiles = function(){
+        var resultArray = [];
+        for(var i = 0; i < height; i ++){
+            var thisRow = []
+            for(var iter = 0; iter < width; iter ++) {
+                thisRow.push(tileTypes[Math.floor(Math.random()*10/3)])
+            }
+            resultArray.push(thisRow)
+        }
+        return resultArray;
+        
+    }()
+    this.getWalkableOutput = function getWalkableOutput() {
+        var row = 0;
+        var prntStr = "";
+        for(row = 0; row < height; row ++) {
+          var i = 0;
+          
+          for(i = 0; i < width; i ++){
+            if(this.tiles[row].i === "grass" || "sand") {
+              prntStr += "0";
+            }
+            else {
+              prntStr += "X";
+            }
+          }
+          prntStr += "/n";
+    }
+    console.log(prntStr);
+    }
+        }
+
+    
+    
+    
+   
+// string.replace(searchvalue,newvalue)
+//    ;
+//    this.getAsciiOutput = ;
+
+
+/*  * Create a constructor function called `Map` that will generate a map. 
+    This function will take parameters `width` and `height` and 
+    create a map object with these properties:
+    
+    * `width`: whatever was passed to the `Map` constructor function 
+        (should be an integer value)
+    * `height`: whatever was passed to the `Map` constructor function 
+        (should be an integer value)
+    * `tiles`: this property should be created as a 2D array of `Tile` objects 
+        *inside the constructor*. Using two nested `for` loops bound by 
+        `width` and `height` respectively, create `new Tile` objects and 
+        give them a **random** value for the `type`, between "grass", 
+        "sand" and "water".
   * The `Map` objects should also have two methods on them:
-    * `getWalkableOutput`: this method should iterate over the `this.tiles` 2D array, and output in the console a rectangle representing the "walkability" of the map. For walkable tiles, use an `O`, and for unwalkable tiles use an `X`. For example, your output could look something like this for a 4x4 map:
+    * `getWalkableOutput`: this method should iterate over the `this.tiles` 
+        2D array, and output in the console a rectangle representing the 
+        "walkability" of the map. For walkable tiles, use an `O`, and 
+        for unwalkable tiles use an `X`. For example, your output 
+        could look something like this for a 4x4 map:
 
     ```
     OOOO
@@ -28,7 +111,11 @@ To do this exercise, let's follow these steps:
     OOOO
     ```
 
-    * `getAsciiOutput`: this method should iterate over the `this.tiles` 2D array and output in the console a rectangle representing the disposition of the map. For grass tiles, use a `*`, for sand tiles use a `:` and for water use a `~` symbol. For example, your output could look something like this for the same 4x4 map as above:
+    * `getAsciiOutput`: this method should iterate over the `this.tiles` 
+        2D array and output in the console a rectangle representing the 
+        disposition of the map. For grass tiles, use a `*`, for sand tiles 
+        use a `:` and for water use a `~` symbol. For example, your output 
+        could look something like this for the same 4x4 map as above:
 
     ```
     ****
@@ -37,5 +124,13 @@ To do this exercise, let's follow these steps:
     ::::
     ```
 
-    * `spawnWarrior` (**challenge**): using the `Warrior` constructor that you created in the above exercise, create a method `spawnWarrior` that takes a warrior object and a `x` and `y` position. This method of the `Map` should take the warrior object and associate it to the appropriate `Tile`.
+    * `spawnWarrior` (**challenge**): using the `Warrior` constructor 
+        that you created in the above exercise, create a method `spawnWarrior` 
+        that takes a warrior object and a `x` and `y` position. 
+        This method of the `Map` should take the warrior object and associate 
+        it to the appropriate `Tile`.
 */
+
+var newMap = new Map(4,4);
+
+console.log(newMap.getWalkableOutput)
